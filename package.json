@@ -1,0 +1,16 @@
+{
+  "name": "github-e2e-tests",
+  "version": "1.0.0",
+  "description": "A project example for e2e tests ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ohad Mark Stoller",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "jest": "^26.0.1",
+    "puppeteer": "^3.0.4"
+  }
+}
