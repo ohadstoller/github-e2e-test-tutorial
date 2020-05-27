@@ -4,7 +4,8 @@
   "description": "A project example for e2e tests ",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "cd tests && node index.js",
+    "test": "cd tests && jest --detectOpenHandles --env=jsdom --modulePaths=."
   },
   "author": "Ohad Mark Stoller",
   "license": "ISC",
