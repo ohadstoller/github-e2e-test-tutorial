@@ -1,5 +1,7 @@
 # github-e2e-test-tutorial
 
+![Screenshot](jest-puppeteer.png)
+
 $ npm install 
 $ npm test 
 
