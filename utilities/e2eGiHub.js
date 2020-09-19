@@ -8,10 +8,7 @@ class e2eGitHub {
         await page.setViewport({ width: 1920, height: 1080 })
         await page.goto(domain, { waitUntil: 'networkidle0' });
         return this.browseLoginPage(page)
-
-
     }
-
     async browseLoginPage(gitHubPage) {
         return {
             login: async (userName, password) => {
@@ -27,7 +24,6 @@ class e2eGitHub {
     async endTest() {
         await this.browser.close();
     }
-
     async browseMainPage(gitHubPage) {
         return {
             searchAndGoToRepo: async (repoName) => {
@@ -40,12 +36,6 @@ class e2eGitHub {
                 console.log('findRepo () end')
                 return this.browseSearchPage(gitHubPage);
             }
-            // getSearchResultName: async () => {
-            //     console.log('getSearchResultName() start')
-            //     await gitHubPage.waitForSelector('h3[class=mb-1')
-            //     const h3 = await gitHubPage.evaluate(el => el.innerHTML, await this.pupeteerPage.$('h3[class=mb-1'))
-            //     return h3
-            // }
         }
     }
     async browseSearchPage(gitHubPage) {
@@ -57,11 +47,6 @@ class e2eGitHub {
                 return h3
             }
         }
-
     }
-
 }
-
-
-
 module.exports = new e2eGitHub  
