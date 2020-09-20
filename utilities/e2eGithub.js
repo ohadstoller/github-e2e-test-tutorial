@@ -21,19 +21,14 @@ class e2eGitHub {
             }
         }
     }
-    async endTest() {
-        await this.browser.close();
-    }
     async browseMainPage(gitHubPage) {
         return {
             searchAndGoToRepo: async (repoName) => {
-                console.log('findRepo () start')
                 await gitHubPage.waitForSelector('input[name=q]');
                 await gitHubPage.hover('input[name=q]');
                 await gitHubPage.type('input[name=q]', repoName, { delay: 100 });
                 await gitHubPage.keyboard.press('Enter');
                 await gitHubPage.waitFor(7000)
-                console.log('findRepo () end')
                 return this.browseSearchPage(gitHubPage);
             }
         }
@@ -41,12 +36,15 @@ class e2eGitHub {
     async browseSearchPage(gitHubPage) {
         return {
             getSearchResultName: async () => {
-                console.log('getSearchResultName() start')
                 await gitHubPage.waitForSelector('h3[class=mb-1')
                 const h3 = await gitHubPage.evaluate(el => el.innerHTML, await gitHubPage.$('h3[class=mb-1'))
                 return h3
             }
         }
     }
+    async endTest() {
+        await this.browser.close();
+    }
+
 }
 module.exports = new e2eGitHub  

@@ -1,4 +1,4 @@
-const e2eGitHub = require('../utilities/e2eGiHub')
+const e2eGitHub = require('../utilities/e2eGithub')
 const timeout = 8000000
 const { userName, password } = require('../utilities/cred')
 
@@ -8,7 +8,6 @@ describe(
         let loginPage;
         let mainPage;
         let searchResultPage;
-
 
         beforeAll(
             async () => {
@@ -22,8 +21,7 @@ describe(
                 }
             }, timeout
         );
-
-        it("As an end-user, the search-input directs to a proper search result page, and confirmed by the page title",
+        it("As an end-user, I can search for a sepcific repository, and receive a desired result",
             async () => {
                 let repoName = 'React'
                 searchResultPage = await mainPage.searchAndGoToRepo(repoName)
@@ -31,7 +29,6 @@ describe(
                 await expect(searchResultHeaderName).toBe(repoName)
             }, timeout
         );
-
         afterAll(
             async () => {
                 await e2eGitHub.endTest()
