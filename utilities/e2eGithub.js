@@ -7,9 +7,9 @@ class e2eGitHub {
         page.setDefaultTimeout(1000 * 60 * 5);
         await page.setViewport({ width: 1920, height: 1080 })
         await page.goto(domain, { waitUntil: 'networkidle0' });
-        return this.browseLoginPage(page)
+        return this.loginPage(page)
     }
-    async browseLoginPage(gitHubPage) {
+    async loginPage(gitHubPage) {
         return {
             login: async (userName, password) => {
                 await gitHubPage.waitForSelector('input[id=login_field]', { visible: true });
@@ -17,11 +17,11 @@ class e2eGitHub {
                 await gitHubPage.waitForSelector('input[id=password]');
                 await gitHubPage.type('input[id=password]', password, { delay: 100 });
                 await gitHubPage.click('input[type="submit"]');
-                return this.browseMainPage(gitHubPage);
+                return this.mainPage(gitHubPage);
             }
         }
     }
-    async browseMainPage(gitHubPage) {
+    async mainPage(gitHubPage) {
         return {
             searchAndGoToRepo: async (repoName) => {
                 await gitHubPage.waitForSelector('input[name=q]');
@@ -29,11 +29,11 @@ class e2eGitHub {
                 await gitHubPage.type('input[name=q]', repoName, { delay: 100 });
                 await gitHubPage.keyboard.press('Enter');
                 await gitHubPage.waitFor(7000)
-                return this.browseSearchPage(gitHubPage);
+                return this.searchPage(gitHubPage);
             }
         }
     }
-    async browseSearchPage(gitHubPage) {
+    async searchPage(gitHubPage) {
         return {
             getSearchResultName: async () => {
                 await gitHubPage.waitForSelector('h3[class=mb-1')
