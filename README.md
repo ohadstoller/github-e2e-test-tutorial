@@ -7,12 +7,17 @@ TL;DR - The article will give you a good idea of how to write an E2E test ( a fu
 ![Screenshot](jest-puppeteer.jpg)
 
 Make sure to create your own cred.js file. Type and export your userName and password, e.g:
+
 exports.userName = 'someUserName'
+
 exports.password = '12345678'
+
 // Fill in your Github login info.
 
 Then, please run
+
 $ npm install 
+
 $ npm test
 
 "E2E test as an end-user, perform the tests below:"
