@@ -5,15 +5,16 @@ const { userName, password } = require('../utilities/cred')
 describe(
     'E2E test as an end-user, perform the tests below:',
     () => {
-        let loginPage;
-        let mainPage;
-        let searchResultPage;
+        let loggedPage;
+        let page;
 
         beforeAll(
             async () => {
                 try {
-                    loginPage = await e2eGitHub.startTest('https://github.com/login', false)
-                    mainPage = await loginPage.login(userName, password)
+                    page = await browser.newPage();
+                    await page.setViewport({ width: 1920, height: 1080 })
+                    loggedPage = new e2eGitHub(page, userName, password, 'https://github.com/login')
+                    await loggedPage.login();
                 }
                 catch (error) {
                     console.log(error);
@@ -21,18 +22,21 @@ describe(
                 }
             }, timeout
         );
+        
+        afterAll(
+            async () => {
+                await loggedPage.logout();
+                await page.close()
+            }, timeout
+        );
+
         it("As an end-user, I can search for a sepcific repository, and receive a desired result",
             async () => {
                 let repoName = 'React'
-                searchResultPage = await mainPage.searchAndGoToRepo(repoName)
-                const searchResultHeaderName = await searchResultPage.getSearchResultName()
+                await loggedPage.mainPage(repoName)
+                const searchResultHeaderName = await loggedPage.getSearchResult()
                 await expect(searchResultHeaderName).toBe(repoName)
             }, timeout
-        );
-        afterAll(
-            async () => {
-                await e2eGitHub.endTest()
-            }
         );
     }, timeout
 );
